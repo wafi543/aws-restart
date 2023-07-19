@@ -5,9 +5,12 @@ phases:
     runtime-versions:
       nodejs: 14
    
-    # commands:
-    #     # install npm
-    #     - npm install
+    commands:
+        # install node 14
+        - curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
+        - yum -y install nodejs npm
+        # install npm
+        - npm install
        
   build:
     commands:
