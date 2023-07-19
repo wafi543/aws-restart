@@ -1,0 +1,54 @@
+
+.title {
+  margin-bottom: 0px;
+}
+
+.logos {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.tuwaiqLogo {
+  width: 200px;
+  height: 200px;
+}
+
+.awsLogo {
+  background-color: white;
+  height: 150px;
+}
+
+.subTitle {
+  margin-top: 8px;
+}
+
+
+.students {
+  font-size: large;
+  font-weight: bold;
+}
+
+
+.selectButton {
+  margin-top: 8px;
+}
+
+.successMessage { 
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.selectedStudent {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.ant-modal-boidy {
+  display: flex;
+  justify-content: center;
+}
+
+.studentsCount {
+  font-size: 35px;
+}
