@@ -5,9 +5,9 @@ phases:
     runtime-versions:
       nodejs: 14
    
-    commands:
-        # install npm
-        - npm install
+    # commands:
+    #     # install npm
+    #     - npm install
        
   build:
     commands:
