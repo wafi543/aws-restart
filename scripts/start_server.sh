@@ -4,4 +4,4 @@
 cd /app
 
 # starting react app"
-npm start
+sudo npm start
