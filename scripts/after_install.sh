@@ -4,4 +4,4 @@
 cd /app
 
 # install dependencies
-npm install
+sudo npm install
