@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # navigate to app folder
-cd /App
+cd /app
 
 # starting react app"
 npm start
