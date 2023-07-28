@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /var/www/html
-sudo systemctl start codedeploy-agent
+sudo systemctl status codedeploy-agent
 # npm start
 # pm2 start npm --name "twuaiq-students" -- start
 # pm2 startup
