@@ -6,7 +6,7 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ec2-user/server
+    destination: /var/www/html
     overwrite: true
 file_exists_behavior: OVERWRITE
 
@@ -17,16 +17,6 @@ permissions:
     group: ec2-user
 
 hooks:
-
-  BeforeInstall:
-    - location: scripts/before_install.sh
-      timeout: 300
-      runas: root
-
-  AfterInstall:
-    - location: scripts/after_install.sh
-      timeout: 300
-      runas: root
 
   ApplicationStart:
     - location: scripts/start_app.sh     
