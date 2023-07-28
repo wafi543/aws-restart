@@ -18,9 +18,4 @@ artifacts:
   # Include only the files required for your application to run.
   # notably excluded is node_modules, as this will cause overwrite error on deploy
   files:
-    - public/**/*
-    - src/**/*
-    - package.json
-    - appspec.yml
-    - scripts/**/*
-    - tsconfig.json
+    - build/**/*
