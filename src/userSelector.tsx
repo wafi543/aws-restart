@@ -15,6 +15,7 @@ const UserSelector: FC = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedStudentIndex, setSelectedStudentIndex] = useState<number>();
   const [selectedStudent, setSelectedStudent] = useState<string>('');
+  const [selectDisabled, setSelectDisabled] = useState<boolean>(false);
 
   useEffect(() => {
     beginFromStart();
@@ -22,6 +23,11 @@ const UserSelector: FC = () => {
 
   const selectRandomStudent = () => {
     // implement random selection
+    setSelectDisabled(false);
+    if (users.length === 0) {
+      showNoOneElse();
+      return;
+    }
     const randomIndex = Math.floor(Math.random() * users.length);
     let name = users[randomIndex];
     setSelectedStudentIndex(randomIndex);
@@ -38,15 +44,21 @@ const UserSelector: FC = () => {
     })
     setModalVisible(false);
     if (newLength == 0) {
-      Modal.success({
-        content: <b className={styles.successMessage}>'No one else! 😃'</b>
-      })
+      showNoOneElse()
     }
   }
 
+  const showNoOneElse = () => {
+    setSelectDisabled(true);
+    Modal.success({
+      content: <b className={styles.successMessage}>'No one else! 😃'</b>
+    })
+  }
+
   const beginFromStart = () => {
+    setSelectDisabled(false);
     setModalVisible(false);
-    setUsers(['Wafi'])
+    setUsers([])
   }
 
   return <>
@@ -60,7 +72,7 @@ const UserSelector: FC = () => {
       <b className={styles.students}>Remaining Students: <b className={styles.studentsCount}>{users.length}</b></b>
     </Row>
     <Row style={{ marginBottom: '30px'}}>
-      <Col><Button type='primary' className={styles.selectButton} onClick={selectRandomStudent}>Select Student</Button></Col>
+      <Col><Button disabled={selectDisabled} type='primary' className={styles.selectButton} onClick={selectRandomStudent}>Select Student</Button></Col>
     </Row>
     <Row><Col><Button onClick={beginFromStart}>Start Again</Button></Col></Row>
     <Modal open={modalVisible}
