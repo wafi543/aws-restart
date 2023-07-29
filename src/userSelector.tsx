@@ -46,7 +46,7 @@ const UserSelector: FC = () => {
 
   const beginFromStart = () => {
     setModalVisible(false);
-    setUsers([])
+    setUsers(['Wafi'])
   }
 
   return <>
