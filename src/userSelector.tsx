@@ -4,14 +4,16 @@ import styles from './userSelector.module.scss';
 import TuwaiqIcon from './logos/tuwaiq.png';
 import AWSLogo from './logos/aws-restart.png'
 import { useEffect } from "react";
+import axios from "axios";
 
 
 interface User {
+  id: number;
   name: string;
 }
 
 const UserSelector: FC = () => {
-  const [users, setUsers] = useState<string[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedStudentIndex, setSelectedStudentIndex] = useState<number>();
   const [selectedStudent, setSelectedStudent] = useState<string>('');
@@ -21,6 +23,13 @@ const UserSelector: FC = () => {
     beginFromStart();
   }, [])
 
+  const getStudents = () => {
+    const backendURL = "http://16.170.221.41:3001/students";
+    axios.get(backendURL).then((res : any) => {
+      setUsers(res.data);
+    })
+  }
+
   const selectRandomStudent = () => {
     // implement random selection
     setSelectDisabled(false);
@@ -29,9 +38,9 @@ const UserSelector: FC = () => {
       return;
     }
     const randomIndex = Math.floor(Math.random() * users.length);
-    let name = users[randomIndex];
+    let user = users[randomIndex];
     setSelectedStudentIndex(randomIndex);
-    setSelectedStudent(name);
+    setSelectedStudent(user.name);
     setModalVisible(true);
   }
 
@@ -58,7 +67,7 @@ const UserSelector: FC = () => {
   const beginFromStart = () => {
     setSelectDisabled(false);
     setModalVisible(false);
-    setUsers([])
+    getStudents();
   }
 
   return <>
