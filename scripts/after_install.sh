@@ -1,7 +1,7 @@
 #!/bin/bash
 # setup backend node express
 # sudo fuser -k 3001/tcp
-sudo service status codedeploy-agent
+sudo systemctl status codedeploy-agent
 # DIR="/home/ec2-user/aws-backend-node"
 # if [ -d "$DIR" ]; then
 #   git config --global --add safe.directory /home/ec2-user/aws-backend-node
