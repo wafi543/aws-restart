@@ -13,7 +13,7 @@ else
   cd ~
   echo "git clone https://github.com/wafi543/aws-backend-node"
   git clone https://github.com/wafi543/aws-backend-node
-  cd aws-backend-node
+  cd ~/aws-backend-node
   sudo npm install
   # node -r dotenv/config index.js
 fi
