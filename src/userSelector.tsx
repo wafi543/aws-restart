@@ -4,7 +4,7 @@ import styles from './userSelector.module.scss';
 import TuwaiqIcon from './logos/tuwaiq.png';
 import AWSLogo from './logos/aws-restart.png'
 import { useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 
 interface User {
@@ -12,7 +12,11 @@ interface User {
   name: string;
 }
 
-const UserSelector: FC = () => {
+interface IProps {
+  isGrouped: boolean;
+}
+
+const UserSelector: FC<IProps> = ({ isGrouped }) => {
   const [users, setUsers] = useState<User[]>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedStudentIndex, setSelectedStudentIndex] = useState<number>();
@@ -23,10 +27,18 @@ const UserSelector: FC = () => {
     beginFromStart();
   }, [])
 
+  const beginFromStart = () => {
+    setSelectDisabled(false);
+    setModalVisible(false);
+    getStudents();
+  }
+
   const getStudents = () => {
-    const backendURL = "http://16.170.221.41:3001/students";
+    const backendURL = `http://16.170.221.41:3001/${isGrouped ? 'groups' : 'students'}`;
     axios.get(backendURL).then((res : any) => {
       setUsers(res.data);
+    }).catch((err: AxiosError) => {
+      Modal.error({content: err.message});
     })
   }
 
@@ -64,29 +76,23 @@ const UserSelector: FC = () => {
     })
   }
 
-  const beginFromStart = () => {
-    setSelectDisabled(false);
-    setModalVisible(false);
-    getStudents();
-  }
-
   return <>
     <Row className={styles.logos}>
       <Col><img className={styles.awsLogo} src={AWSLogo}></img></Col>
       <Col><img className={styles.tuwaiqLogo} src={TuwaiqIcon}></img></Col>
     </Row>
     <h1 className={styles.title}>aws re/start طويق وأمازون للحوسبة السحابية</h1>
-    <h2 className={styles.subTitle}>Student Random Selector</h2>
+    <h2 className={styles.subTitle}>Twuaiq Academy Random Selector</h2>
     <Row>
-      <b className={styles.students}>Remaining Students: <b className={styles.studentsCount}>{users.length}</b></b>
+      <b className={styles.students}>Remaining {isGrouped ? 'groups' : 'persons'}: <b className={styles.studentsCount}>{users.length}</b></b>
     </Row>
     <Row style={{ marginBottom: '30px'}}>
-      <Col><Button disabled={selectDisabled} type='primary' className={styles.selectButton} onClick={selectRandomStudent}>Select Student</Button></Col>
+      <Col><Button disabled={selectDisabled} type='primary' className={styles.selectButton} onClick={selectRandomStudent}>Select {isGrouped ? 'Group' : 'Person'}</Button></Col>
     </Row>
     <Row><Col><Button onClick={beginFromStart}>Start Again</Button></Col></Row>
-    <Modal open={modalVisible}
+    <Modal className={styles.modal} open={modalVisible}
       footer={<Button type="primary" onClick={deleteSelectedStudent}>OK</Button>}>
-      <b className={styles.selectedStudent}>{selectedStudent}</b>
+      <b className={styles.selectedTitle}>Selected {isGrouped ? 'Group' : 'Person'}: <br /> <b className={styles.selectedStudent}>{selectedStudent}</b></b>
     </Modal>
   </>
 }
