@@ -39,9 +39,14 @@
   font-weight: bold;
 }
 
+.selectedTitle {
+  width: 100%;
+  text-align: center;
+}
+
 .selectedStudent {
   font-weight: bold;
-  font-size: 24px;
+  font-size: 50px;
 }
 
 .ant-modal-boidy {
@@ -51,4 +56,12 @@
 
 .studentsCount {
   font-size: 35px;
+}
+
+.modal {
+  :global {
+    .ant-modal-body {
+      display: flex;
+    }
+  }
 }
