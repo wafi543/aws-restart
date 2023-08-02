@@ -2,10 +2,10 @@
 cd /var/www/html
 sudo rm -rf *
 sudo mv /home/ec2-user/server/build/* /var/www/html/
-ls ~
 echo "starting backend app..."
 sudo fuser -k 3001/tcp
-cd ~/aws-backend-node
+cd /home/ec2-user/
+ls
 node -r dotenv/config index.js
 # DIR="/home/ec2-user/aws-backend-node"
 # if [ -d "$DIR" ]; then
