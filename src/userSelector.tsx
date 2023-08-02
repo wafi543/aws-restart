@@ -84,7 +84,7 @@ const UserSelector: FC = () => {
       <Col><img className={styles.tuwaiqLogo} src={TuwaiqIcon}></img></Col>
     </Row>
     <h1 className={styles.title}>aws re/start طويق وأمازون للحوسبة السحابية</h1>
-    <h2 className={styles.subTitle}>Twuaiq Academy Random Selector</h2>
+    <h2 className={styles.subTitle}>Tuwaiq Academy Random Selector</h2>
     <Row>
       <b className={styles.students}>Remaining {isGrouped ? 'groups' : 'persons'}: <b className={styles.studentsCount}>{users.length}</b></b>
     </Row>
