@@ -5,16 +5,11 @@ import './App.css';
 import UserSelector from './userSelector';
 
 
-const router = createBrowserRouter([
-  {path: '/', element: <UserSelector isGrouped={false}></UserSelector>},
-  {path: '/groups', element: <UserSelector isGrouped={true}></UserSelector>}
-])
-
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <RouterProvider router={router}></RouterProvider>
+        <UserSelector></UserSelector>
       </header>
     </div>
   );

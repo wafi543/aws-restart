@@ -12,28 +12,25 @@ interface User {
   name: string;
 }
 
-interface IProps {
-  isGrouped: boolean;
-}
-
-const UserSelector: FC<IProps> = ({ isGrouped }) => {
+const UserSelector: FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedStudentIndex, setSelectedStudentIndex] = useState<number>();
   const [selectedStudent, setSelectedStudent] = useState<string>('');
   const [selectDisabled, setSelectDisabled] = useState<boolean>(false);
+  const [isGrouped, setIsGrouped] = useState<boolean>(false);
 
   useEffect(() => {
-    beginFromStart();
+    beginFromStart(false);
   }, [])
 
-  const beginFromStart = () => {
+  const beginFromStart = (isGrouped: boolean) => {
     setSelectDisabled(false);
     setModalVisible(false);
-    getStudents();
+    getStudents(isGrouped);
   }
 
-  const getStudents = () => {
+  const getStudents = (isGrouped: boolean) => {
     const backendURL = `http://16.170.221.41:3001/${isGrouped ? 'groups' : 'students'}`;
     axios.get(backendURL).then((res : any) => {
       setUsers(res.data);
@@ -76,6 +73,11 @@ const UserSelector: FC<IProps> = ({ isGrouped }) => {
     })
   }
 
+  const switchBetweenTypes = () => {
+    beginFromStart(!isGrouped);
+    setIsGrouped(!isGrouped);
+  }
+
   return <>
     <Row className={styles.logos}>
       <Col><img className={styles.awsLogo} src={AWSLogo}></img></Col>
@@ -89,7 +91,10 @@ const UserSelector: FC<IProps> = ({ isGrouped }) => {
     <Row style={{ marginBottom: '30px'}}>
       <Col><Button disabled={selectDisabled} type='primary' className={styles.selectButton} onClick={selectRandomStudent}>Select {isGrouped ? 'Group' : 'Person'}</Button></Col>
     </Row>
-    <Row><Col><Button onClick={beginFromStart}>Start Again</Button></Col></Row>
+    <Row className={styles.rowButtons}>
+      <Col><Button onClick={() => beginFromStart(isGrouped)}>Start Again</Button></Col>
+      <Col><Button onClick={() => {switchBetweenTypes()}}>{isGrouped ? 'Go to Users' : 'Go to Groups'}</Button></Col>
+    </Row>
     <Modal className={styles.modal} open={modalVisible}
       footer={<Button type="primary" onClick={deleteSelectedStudent}>OK</Button>}>
       <b className={styles.selectedTitle}>Selected {isGrouped ? 'Group' : 'Person'}: <br /> <b className={styles.selectedStudent}>{selectedStudent}</b></b>
