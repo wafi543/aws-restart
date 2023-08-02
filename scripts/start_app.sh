@@ -6,16 +6,16 @@ echo "starting backend app..."
 sudo fuser -k 3001/tcp
 cd /home/ec2-user/
 ls
-node -r dotenv/config index.js
-# DIR="/home/ec2-user/aws-backend-node"
-# if [ -d "$DIR" ]; then
-#   git config --global --add safe.directory /home/ec2-user/aws-backend-node
-#   ### Take action if $DIR exists ###
-#   cd /home/ec2-user/aws-backend-node
-#   git fetch origin
-#   git pull
-#   # node -r dotenv/config index.js
-# else
+DIR="/home/ec2-user/aws-backend-node"
+if [ -d "$DIR" ]; then
+  git config --global --add safe.directory /home/ec2-user/aws-backend-node
+  ### Take action if $DIR exists ###
+  cd /home/ec2-user/aws-backend-node
+  git fetch origin
+  git pull
+  node -r dotenv/config index.js
+else
+  echo "aws-backend-node folder doesn't exist :("
 #   git config --global --add safe.directory /home/ec2-user/aws-backend-node
 #   ###  Control will jump here if $DIR does NOT exists ###
 #   cd ~
