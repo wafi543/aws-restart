@@ -16,6 +16,7 @@ if [ -d "$DIR" ]; then
   node -r dotenv/config index.js
 else
   echo "aws-backend-node folder doesn't exist :("
+fi
 #   git config --global --add safe.directory /home/ec2-user/aws-backend-node
 #   ###  Control will jump here if $DIR does NOT exists ###
 #   cd ~
@@ -24,4 +25,3 @@ else
 #   cd /home/ec2-user/aws-backend-node
 #   sudo npm install
 #   # node -r dotenv/config index.js
-# fi
