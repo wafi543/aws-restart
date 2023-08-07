@@ -31,7 +31,7 @@ const UserSelector: FC = () => {
   }
 
   const getStudents = (isGrouped: boolean) => {
-    const backendURL = `http://16.170.221.41:3001/${isGrouped ? 'groups' : 'students'}`;
+    const backendURL = `${process.env.REACT_APP_BACKEND_URL}${isGrouped ? 'groups' : 'students'}`;
     axios.get(backendURL).then((res : any) => {
       setUsers(res.data);
     }).catch((err: AxiosError) => {
